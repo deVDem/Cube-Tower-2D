@@ -1,0 +1,316 @@
+{
+  "localeList": [
+    {
+      "lang": "en",
+      "name": "English",
+      "texts": [
+        {
+          "key": "Start.UI.presents",
+          "text": "presents"
+        },
+        {
+          "key": "Start.UI.firstproj",
+          "text": "This is my first project on Unity"
+        },
+        {
+          "key": "Start.UI.ideaby",
+          "text": "idea by"
+        },
+        {
+          "key": "Start.UI.loading",
+          "text": "Loading..."
+        },
+        {
+          "key": "Start.UI.musicby",
+          "text": "music by"
+        },
+        {
+          "key": "Game.UI.score",
+          "text": "SCORE"
+        },
+        {
+          "key": "Game.UI.best",
+          "text": "BEST"
+        },
+        {
+          "key": "Game.UI.TapToStart",
+          "text": "Tap to start"
+        },
+        {
+          "key": "Game.UI.Restart",
+          "text": "RESTART"
+        },
+        {
+          "key": "Game.UI.settings",
+          "text": "SETTINGS"
+        },
+        {
+          "key": "Game.UI.music",
+          "text": "Music"
+        },
+        {
+          "key": "Game.UI.fastest",
+          "text": "Fastest"
+        },
+        {
+          "key": "Game.UI.medium",
+          "text": "Medium"
+        },
+        {
+          "key": "Game.UI.high",
+          "text": "High"
+        },
+        {
+          "key": "Game.UI.graphics",
+          "text": "Graphics:"
+        },
+        {
+          "key": "Game.UI.FPSCounter",
+          "text": "FPS Counter"
+        },
+        {
+          "key": "Game.UI.ClearData",
+          "text": "Clear records"
+        },
+        {
+          "key": "Game.UI.GameMode.Default",
+          "text": "Default"
+        },
+        {
+          "key": "Game.UI.GameMode.OnTime",
+          "text": "On Time"
+        },
+        {
+          "key": "Game.UI.GameMode.Hard",
+          "text": "Hard"
+        },
+        {
+          "key": "Game.UI.GameMode.Creative",
+          "text": "Creative"
+        },
+        {
+          "key": "Game.UI.GameModes",
+          "text": "GameModes"
+        },
+        {
+          "key": "Game.UI.GameModes.Default",
+          "text": "Default mode"
+        },
+        {
+          "key": "Game.UI.GameModes.OnTime",
+          "text": "On time mode"
+        },
+        {
+          "key": "Game.UI.GameModes.Hard",
+          "text": "Hard mode"
+        },
+        {
+          "key": "Game.UI.GameModes.Creative",
+          "text": "Creative mode"
+        },
+        {
+          "key": "Game.UI.GameModes.Change",
+          "text": "Change"
+        },
+        {
+          "key": "Game.UI.GameModes.Unavailable",
+          "text": "Unavailable"
+        },
+        {
+          "key": "Game.UI.GameModes.Current",
+          "text": "Current"
+        },
+        {
+          "key": "Game.UI.GameModes.Default.Description",
+          "text": "Normal mode without complications."
+        },
+        {
+          "key": "Game.UI.GameModes.OnTime.Description",
+          "text": "Normal mode with a timer for installing the block. Time expired - loss."
+        },
+        {
+          "key": "Game.UI.GameModes.Hard.Description",
+          "text": "Complex mode with a timer and with a visible wind that has a random direction that is set at the beginning of the game."
+        },
+        {
+          "key": "Game.UI.GameModes.Creative.Description",
+          "text": "Creative mode for creative people. Just place blocks in any direction and make sure your tower doesn't fall!"
+        },
+        {
+          "key": "Game.UI.GameModes.Needs",
+          "text": "Best score: {0}. Need score on previous mode: {1}"
+        },
+        {
+          "key": "Game.UI.GameModes.Best",
+          "text": "Best score: {0}."
+        },
+        {
+          "key": "Game.UI.GameModes.TemporaryUnavailable",
+          "text": "Temporary unavailable"
+        },
+        {
+          "key": "Game.UI.GameModes.TemporaryUnavailable",
+          "text": "Temporary unavailable"
+        },
+        {
+          "key": "Game.UI.WatchAd",
+          "text": "+25 SCORE"
+        }
+      ]
+    },
+    {
+      "lang": "ru",
+      "name": "Русский",
+      "texts": [
+        {
+          "key": "Start.UI.presents",
+          "text": "представляет"
+        },
+        {
+          "key": "Start.UI.firstproj",
+          "text": "Это мой первый проект в Unity"
+        },
+        {
+          "key": "Start.UI.ideaby",
+          "text": "идея"
+        },
+        {
+          "key": "Start.UI.loading",
+          "text": "Загрузка..."
+        },
+        {
+          "key": "Start.UI.musicby",
+          "text": "музыка"
+        },
+        {
+          "key": "Game.UI.score",
+          "text": "ОЧКИ"
+        },
+        {
+          "key": "Game.UI.best",
+          "text": "РЕКОРД"
+        },
+        {
+          "key": "Game.UI.TapToStart",
+          "text": "Нажми, чтобы играть"
+        },
+        {
+          "key": "Game.UI.Restart",
+          "text": "РЕСТАРТ"
+        },
+        {
+          "key": "Game.UI.settings",
+          "text": "НАСТРОЙКИ"
+        },
+        {
+          "key": "Game.UI.music",
+          "text": "Музыка"
+        },
+        {
+          "key": "Game.UI.fastest",
+          "text": "Быстрая"
+        },
+        {
+          "key": "Game.UI.medium",
+          "text": "Средняя"
+        },
+        {
+          "key": "Game.UI.high",
+          "text": "Высокая"
+        },
+        {
+          "key": "Game.UI.graphics",
+          "text": "Графика:"
+        },
+        {
+          "key": "Game.UI.FPSCounter",
+          "text": "Счётчик кадров"
+        },
+        {
+          "key": "Game.UI.ClearData",
+          "text": "Удалить рекорды"
+        },
+        {
+          "key": "Game.UI.GameMode.Default",
+          "text": "Обычный"
+        },
+        {
+          "key": "Game.UI.GameMode.OnTime",
+          "text": "На время"
+        },
+        {
+          "key": "Game.UI.GameMode.Hard",
+          "text": "Сложный"
+        },
+        {
+          "key": "Game.UI.GameMode.Creative",
+          "text": "Творческий"
+        },
+        {
+          "key": "Game.UI.GameModes",
+          "text": "Игровые режимы"
+        },
+        {
+          "key": "Game.UI.GameModes.Default",
+          "text": "Обычный режим"
+        },
+        {
+          "key": "Game.UI.GameModes.OnTime",
+          "text": "Режим на время"
+        },
+        {
+          "key": "Game.UI.GameModes.Hard",
+          "text": "Сложный режим"
+        },
+        {
+          "key": "Game.UI.GameModes.Creative",
+          "text": "Творческий режим"
+        },
+        {
+          "key": "Game.UI.GameModes.Change",
+          "text": "Сменить"
+        },
+        {
+          "key": "Game.UI.GameModes.Unavailable",
+          "text": "Недоступно"
+        },
+        {
+          "key": "Game.UI.GameModes.Current",
+          "text": "Текущий"
+        },
+        {
+          "key": "Game.UI.GameModes.Default.Description",
+          "text": "Обычный режим без усложнений."
+        },
+        {
+          "key": "Game.UI.GameModes.OnTime.Description",
+          "text": "Обычный режим с таймером (10 сек) на установку блока. Истекло время - проигрыш."
+        },
+        {
+          "key": "Game.UI.GameModes.Hard.Description",
+          "text": "Сложный режим с более коротким таймером (5 сек) на установку блока."
+        },
+        {
+          "key": "Game.UI.GameModes.Creative.Description",
+          "text": "Творческий режим для креативных людей. Просто ставьте блоки в любом направлении и убедитесь, что ваша башня не упадёт!"
+        },
+        {
+          "key": "Game.UI.GameModes.Needs",
+          "text": "Рекорд: {0}. Необходимо очков на предыдущем режиме: {1}"
+        },
+        {
+          "key": "Game.UI.GameModes.Best",
+          "text": "Рекорд: {0}."
+        },
+        {
+          "key": "Game.UI.GameModes.TemporaryUnavailable",
+          "text": "Временно недоступно"
+        },
+        {
+          "key": "Game.UI.WatchAd",
+          "text": "+25 ОЧКОВ"
+        }
+      ]
+    }
+  ]
+}

@@ -34,3 +34,5 @@ sysinfo.txt
 *.stackdump
 
 Media/
+Logs/AssetImportWorker0.log
+*.log

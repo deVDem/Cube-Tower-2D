@@ -30,7 +30,6 @@ public class GameModeController : MonoBehaviour
     
     // Loss rate table
     private DateTime date;
-    private string lossRateTableId = "CgkIqMWb58IFEAIQCQ";
 
     private void Awake()
     {
@@ -151,7 +150,6 @@ public class GameModeController : MonoBehaviour
             DateTime dateTime = DateTime.Now;
             TimeSpan lossTime = dateTime-date;
             Debug.Log(dateTime.Minute+":"+dateTime.Second);
-            GooglePlayUtils.UploadScore(lossRateTableId, Convert.ToInt32(lossTime.TotalMilliseconds));
             Debug.Log(Convert.ToInt32(lossTime.TotalMilliseconds));
         }
     }

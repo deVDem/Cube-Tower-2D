@@ -213,31 +213,6 @@ namespace Game_Scene
                     QualitySettings.SetQualityLevel(5);
                     break;
             }
-
-            if (GooglePlayUtils.Instance == null)
-            {
-                GameObject gameObject = new GameObject(name = "GPG Manager");
-                gameObject.AddComponent<GooglePlayUtils>();
-                DontDestroyOnLoad(gameObject);
-            }
-
-            Invoke(nameof(CheckGms), 1);
-        }
-
-        private void CheckGms()
-        {
-            if (GooglePlayUtils.Instance.Connected)
-            {
-                GPGConnect.gameObject.SetActive(false);
-                GPGAchievements.gameObject.SetActive(true);
-                GPGLeaderBoards.gameObject.SetActive(true);
-            }
-            else
-            {
-                GPGConnect.gameObject.SetActive(true);
-                GPGAchievements.gameObject.SetActive(false);
-                GPGLeaderBoards.gameObject.SetActive(false);
-            }
         }
 
         public void RestartGame()
@@ -348,7 +323,7 @@ namespace Game_Scene
             GameObject tmpObject = Instantiate(allCubes, allCubes.transform.position, Quaternion.identity);
             Rigidbody2D tmpRg = tmpObject.GetComponent<Rigidbody2D>();
             allCubes.SetActive(false);
-            Physics2D.autoSimulation = false;
+            Physics2D.simulationMode = SimulationMode2D.Script;
 
             try
             {
@@ -364,7 +339,8 @@ namespace Game_Scene
                 Console.WriteLine(e);
             }
 
-            Physics2D.autoSimulation = true;
+
+            Physics2D.simulationMode = SimulationMode2D.FixedUpdate;
 
             allCubes.SetActive(true);
             _allCubesRb.simulated = false;
@@ -372,7 +348,6 @@ namespace Game_Scene
             if (explodeCubes.collided || Mathf.Abs(tmpRg.velocity.magnitude) > 2f ||
                 Mathf.Abs(tmpRg.angularVelocity) > 0.5f / score)
             {
-                UpdateAchievementsLeaders();
                 _isLose = true;
                 StopCoroutine(_changeCubeCoroutine);
                 Destroy(placingCube.gameObject);
@@ -519,54 +494,11 @@ namespace Game_Scene
 
         public void GameOver()
         {
-            UpdateAchievementsLeaders();
-            addScoreAdButton.SetActive(AdMobManager.Instance.rewardedAd.IsLoaded());
             _isLose = true;
             StopCoroutine(_changeCubeCoroutine);
             if (placingCube != null) Destroy(placingCube.gameObject);
             _gameModeController.onGameEnded();
             explodeCubes.Explode(allCubes.transform, -20f);
-        }
-
-        private void UpdateAchievementsLeaders()
-        {
-            switch (_gameModeController.GameMode)
-            {
-                case "default":
-                    GooglePlayUtils.GetAchievement(achivementsIds[0], bestScore / 50f * 100f);
-                    GooglePlayUtils.GetAchievement(achivementsIds[3], bestScore / 100f * 100f);
-                    GooglePlayUtils.UploadScore(leaderBoardsIds[0], bestScore);
-                    break;
-                case "ontime":
-                    GooglePlayUtils.GetAchievement(achivementsIds[1], bestScore / 50f * 100f);
-                    GooglePlayUtils.GetAchievement(achivementsIds[4], bestScore / 100f * 100f);
-                    GooglePlayUtils.UploadScore(leaderBoardsIds[1], bestScore);
-                    break;
-                case "hard":
-                    GooglePlayUtils.GetAchievement(achivementsIds[2], bestScore / 50f * 100f);
-                    GooglePlayUtils.GetAchievement(achivementsIds[5], bestScore / 100f * 100f);
-                    GooglePlayUtils.GetAchievement(achivementsIds[6], bestScore / 300f * 100f);
-                    GooglePlayUtils.UploadScore(leaderBoardsIds[2], bestScore);
-                    break;
-                case "creative":
-                    break;
-            }
-        }
-
-        public void reLoginGPG()
-        {
-            GooglePlayUtils.ReLogin();
-            CheckGms();
-        }
-
-        public void ShowAchievements()
-        {
-            GooglePlayUtils.ShowAchievements();
-        }
-
-        public void ShowLeaderBoard()
-        {
-            GooglePlayUtils.ShowLeaderBoard();
         }
 
 
@@ -580,17 +512,6 @@ namespace Game_Scene
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();
             RestartGame();
-        }
-
-        public void showRewindAd()
-        {
-            AdMobManager.showAd();
-            addScoreAdButton.SetActive(false);
-        }
-
-        public static void getReward()
-        {
-            _instance._addscore = true;
         }
 
         private void GetReward()
@@ -609,7 +530,6 @@ namespace Game_Scene
                                        "\n<color=#ff5555>" + LocaleManager.GetLocalizedText("Game.UI.score") +
                                        "</color>: " +
                                        score;
-            UpdateAchievementsLeaders();
         }
     }
 

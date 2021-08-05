@@ -29,6 +29,7 @@ ehthumbs.db
 [Oo]bj/
 [Bb]uild
 [Ll]ibrary/
+Temp/
 sysinfo.txt
 *.stackdump
 

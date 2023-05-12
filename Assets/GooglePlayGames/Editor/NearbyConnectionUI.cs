@@ -134,7 +134,7 @@ namespace GooglePlayGames.Editor
                 GPGSProjectSettings.Instance.Save();
 
                 // Resolve the dependencies
-                Google.VersionHandler.VerboseLoggingEnabled = true;
+                /*Google.VersionHandler.VerboseLoggingEnabled = true;
                 Google.VersionHandler.UpdateVersionedAssets(forceUpdate: true);
                 Google.VersionHandler.Enabled = true;
                 AssetDatabase.Refresh();
@@ -143,7 +143,7 @@ namespace GooglePlayGames.Editor
                     Google.VersionHandler.FindClass(
                         "Google.JarResolver",
                         "GooglePlayServices.PlayServicesResolver"),
-                    "MenuResolve", null);
+                    "MenuResolve", null);*/
             }
 
             return true;

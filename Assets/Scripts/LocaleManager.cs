@@ -24,7 +24,9 @@ public class LocaleManager : MonoBehaviour
     }
     void Awake()
     {
-        _instance = this;
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
+        QualitySettings.vSyncCount = 1;
+       _instance = this;
         _languagesJson = Resources.Load("Languages") as TextAsset;
         if (_languagesJson != null) _locale = JsonUtility.FromJson<Locales>(_languagesJson.text);
         else

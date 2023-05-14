@@ -348,7 +348,7 @@ namespace Game_Scene
             GameObject tmpObject = Instantiate(allCubes, allCubes.transform.position, Quaternion.identity);
             Rigidbody2D tmpRg = tmpObject.GetComponent<Rigidbody2D>();
             allCubes.SetActive(false);
-            Physics2D.autoSimulation = false;
+            Physics2D.simulationMode = SimulationMode2D.Script;
 
             try
             {
@@ -364,7 +364,8 @@ namespace Game_Scene
                 Console.WriteLine(e);
             }
 
-            Physics2D.autoSimulation = true;
+            Physics2D.simulationMode = SimulationMode2D.FixedUpdate;
+
 
             allCubes.SetActive(true);
             _allCubesRb.simulated = false;

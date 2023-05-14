@@ -16,10 +16,10 @@ public class MusicLogic : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (Mathf.Abs(_musicSource.volume - 1f) >= 0.0001f && playing) _musicSource.volume = _musicSource.volume+(1f-_musicSource.volume)*Time.deltaTime*4f;
-        else if (Mathf.Abs(_musicSource.volume) >= 0.0001f && !playing) _musicSource.volume = _musicSource.volume+(0f-_musicSource.volume)*Time.deltaTime*4f;
+        if (Mathf.Abs(_musicSource.volume - 1f) >= 0.0001f && playing) _musicSource.volume = _musicSource.volume+(1f-_musicSource.volume)*Time.fixedDeltaTime*4f;
+        else if (Mathf.Abs(_musicSource.volume) >= 0.0001f && !playing) _musicSource.volume = _musicSource.volume+(0f-_musicSource.volume)*Time.fixedDeltaTime * 4f;
         if (!_musicSource.isPlaying)
         {
             currentClip++;

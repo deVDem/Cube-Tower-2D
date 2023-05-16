@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game_Scene;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class ExplodeCubes : MonoBehaviour
@@ -10,6 +11,9 @@ public class ExplodeCubes : MonoBehaviour
     public bool checking;
     public bool collided;
     private bool _collisionSet;
+
+    public GameController controller;
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -28,6 +32,7 @@ public class ExplodeCubes : MonoBehaviour
     {
         float originalMass = obj.GetComponent<Rigidbody2D>().mass;
 
+        controller.collided = true;
         int count = obj.childCount;
         for (int i = count - 1; i >= 0; i--)
         {
@@ -48,6 +53,8 @@ public class ExplodeCubes : MonoBehaviour
         restartButton.SetActive(true);
         restartButton.GetComponent<Animator>().SetTrigger("restartShow");
         if (animator != null) animator.SetTrigger("restartShow");
+        controller.uiAnimator.SetTrigger("SkipBtnHide");
+        controller.collided = true;
     }
 
     public bool CollisionSet => _collisionSet;

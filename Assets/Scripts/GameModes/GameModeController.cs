@@ -128,6 +128,8 @@ public class GameModeController : MonoBehaviour
 
     public void onGameEnded()
     {
+
+        
         switch (GameMode)
         {
             case "default":
@@ -149,8 +151,11 @@ public class GameModeController : MonoBehaviour
         {
             DateTime dateTime = DateTime.Now;
             TimeSpan lossTime = dateTime - date;
+
+#if UNITY_ANDROID
             if (GooglePlayUtils.Instance.IsConnected())
                 GooglePlayUtils.UploadScore(lossRateTableId, Convert.ToInt32(lossTime.TotalMilliseconds));
+#endif
 
         }
     }

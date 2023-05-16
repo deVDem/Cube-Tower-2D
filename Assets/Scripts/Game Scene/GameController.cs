@@ -226,6 +226,8 @@ namespace Game_Scene
 
         private void CheckGms()
         {
+
+#if UNITY_ANDROID
             if (GooglePlayUtils.Instance.Connected)
             {
                 GPGConnect.gameObject.SetActive(false);
@@ -238,6 +240,7 @@ namespace Game_Scene
                 GPGAchievements.gameObject.SetActive(false);
                 GPGLeaderBoards.gameObject.SetActive(false);
             }
+#endif
         }
 
         public void RestartGame()
@@ -372,18 +375,49 @@ namespace Game_Scene
             if (explodeCubes.collided || Mathf.Abs(tmpRg.velocity.magnitude) > 2f ||
                 Mathf.Abs(tmpRg.angularVelocity) > 0.5f / score)
             {
+
+#if UNITY_ANDROID
                 if (GooglePlayUtils.Instance.IsConnected())
                     UpdateAchievementsLeaders();
+#endif
                 _isLose = true;
                 StopCoroutine(_changeCubeCoroutine);
                 Destroy(placingCube.gameObject);
                 _gameModeController.onGameEnded();
+                uiAnimator.SetTrigger("SkipBtnShow");
                 StartCoroutine(wait());
                 _allCubesRb.simulated = true;
             }
 
             explodeCubes.collided = false;
             Destroy(tmpObject);
+        }
+
+
+        public bool collided = false;
+        public void SkipButtonClicked()
+        {
+            uiAnimator.SetTrigger("SkipBtnHide");
+            if (IsLose && !collided)
+            {
+                
+                StartCoroutine(skipCoroutine());
+            }
+        }
+
+        IEnumerator skipCoroutine()
+        {
+            yield return new WaitForSecondsRealtime(0.1f);
+            Debug.Log("Coroutine!");
+            if (collided)
+            {
+                Debug.Log("Collided!");
+                Time.timeScale = 1.0f;
+            } else
+            {
+                Time.timeScale = Time.timeScale+0.2f;
+                StartCoroutine(skipCoroutine());
+            }
         }
 
 
@@ -525,9 +559,13 @@ namespace Game_Scene
 
         public void GameOver()
         {
+            uiAnimator.SetTrigger("SkipBtnHide");
+
+#if UNITY_ANDROID
             if (GooglePlayUtils.Instance.IsConnected())
                 UpdateAchievementsLeaders();
             addScoreAdButton.SetActive(AdMobManager.Instance.rewardedAd.IsLoaded());
+#endif
             _isLose = true;
             StopCoroutine(_changeCubeCoroutine);
             if (placingCube != null) Destroy(placingCube.gameObject);

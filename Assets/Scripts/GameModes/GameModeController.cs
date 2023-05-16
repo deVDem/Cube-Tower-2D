@@ -14,11 +14,11 @@ public class GameModeController : MonoBehaviour
     public Text GameModeText;
 
     private GameController _gameController;
-    
+
     // Buff's
     public BuffManager BuffManager;
-    
-    
+
+
     // Timer
     public float startSecounds = 5f;
     public float intervalTimer = 0.1f;
@@ -26,8 +26,8 @@ public class GameModeController : MonoBehaviour
     private float secounds;
     private Coroutine timer;
     private Animator timerAnimator;
-    
-    
+
+
     // Loss rate table
     private DateTime date;
     private string lossRateTableId = "CgkIqMWb58IFEAIQCQ";
@@ -60,7 +60,7 @@ public class GameModeController : MonoBehaviour
                 GameModeText.text = LocaleManager.GetLocalizedText("Game.UI.GameMode.Creative");
                 break;
             default:
-                Debug.LogError("Unknown gamemode!");
+
                 break;
         }
     }
@@ -87,12 +87,12 @@ public class GameModeController : MonoBehaviour
                 break;
             case "ontime":
                 lastAmount = timerProgressBar.fillAmount;
-                needAmount = lastAmount - (lastAmount-secounds / startSecounds)*Time.deltaTime*3;
+                needAmount = lastAmount - (lastAmount - secounds / startSecounds) * Time.deltaTime * 3;
                 timerProgressBar.fillAmount = needAmount;
                 break;
             case "hard":
                 lastAmount = timerProgressBar.fillAmount;
-                needAmount = lastAmount - (lastAmount-secounds / startSecounds)*Time.deltaTime*3;
+                needAmount = lastAmount - (lastAmount - secounds / startSecounds) * Time.deltaTime * 3;
                 timerProgressBar.fillAmount = needAmount;
                 break;
             case "creative":
@@ -121,7 +121,6 @@ public class GameModeController : MonoBehaviour
         if (GameMode != "creative")
         {
             date = DateTime.Now;
-            Debug.Log(date.Minute+":"+date.Second);
         }
     }
 
@@ -149,10 +148,10 @@ public class GameModeController : MonoBehaviour
         if (GameMode != "creative")
         {
             DateTime dateTime = DateTime.Now;
-            TimeSpan lossTime = dateTime-date;
-            Debug.Log(dateTime.Minute+":"+dateTime.Second);
-            GooglePlayUtils.UploadScore(lossRateTableId, Convert.ToInt32(lossTime.TotalMilliseconds));
-            Debug.Log(Convert.ToInt32(lossTime.TotalMilliseconds));
+            TimeSpan lossTime = dateTime - date;
+            if (GooglePlayUtils.Instance.IsConnected())
+                GooglePlayUtils.UploadScore(lossRateTableId, Convert.ToInt32(lossTime.TotalMilliseconds));
+
         }
     }
 

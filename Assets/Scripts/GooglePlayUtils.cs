@@ -23,12 +23,17 @@ public class GooglePlayUtils : MonoBehaviour
         Debug.Log("GMS connected = " + Instance._connected);
     }
 
+    public bool IsConnected()
+    {
+        return _connected;
+    }
+
     void Start()
     {
         Instance = this;
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
         PlayGamesPlatform.InitializeInstance(config);
-        PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.DebugLogEnabled = false;
         PlayGamesPlatform.Activate();
 
         PlayGamesPlatform.Instance.Authenticate(b =>
@@ -55,16 +60,12 @@ public class GooglePlayUtils : MonoBehaviour
                 if (Social.localUser.authenticated)
                 {
                     Achievement achievement = orderAchievements[0];
-                    Debug.Log("Achievement getting - " + achievement.ID + " on progress: " + achievement.Progress);
                     PlayGamesPlatform.Instance.ReportProgress(achievement.ID, achievement.Progress, s =>
                     {
                         if (s) orderAchievements.Remove(achievement);
-                        else Debug.LogWarning("Achievement not sended");
                     });
 
-                    Debug.Log("Achievement get - " + achievement.ID + " on progress: " + achievement.Progress);
                 }
-                else Debug.LogWarning("GP not connected.");
             }
             yield return new WaitForSeconds(1f);
         }
@@ -72,28 +73,22 @@ public class GooglePlayUtils : MonoBehaviour
 
     public static void GetAchievement(string id, float progress)
     {
-        Debug.Log("Achievement added: id=" + id + ". Progress: " + progress);
         Instance.orderAchievements.Add(new Achievement(id, progress));
     }
 
     public static void UploadScore(string id, int score)
     {
         if (Social.localUser.authenticated) PlayGamesPlatform.Instance.ReportScore(score, id, b => { });
-        else Debug.LogWarning("GP not connected.");
-
-        Debug.Log("Score get - " + id + " on score: " + score);
     }
 
     public static void ShowAchievements()
     {
         if (Social.localUser.authenticated) PlayGamesPlatform.Instance.ShowAchievementsUI();
-        Debug.Log("Showed Achievements");
     }
 
     public static void ShowLeaderBoard()
     {
         if (Social.localUser.authenticated) PlayGamesPlatform.Instance.ShowLeaderboardUI();
-        Debug.Log("Showed Leaderboards");
     }
 
     private void OnApplicationQuit()

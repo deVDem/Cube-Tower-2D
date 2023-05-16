@@ -39,7 +39,7 @@ namespace Game_Scene
         public Button GPGConnect;
         public Button GPGAchievements;
         public Button GPGLeaderBoards;
-        
+
         // AdMob
         public GameObject addScoreAdButton;
         private bool _addscore;
@@ -87,7 +87,7 @@ namespace Game_Scene
 
         private void UpdateGameModeList()
         {
-            string[] gamemodes = {"default", "ontime", "hard", "creative"};
+            string[] gamemodes = { "default", "ontime", "hard", "creative" };
             bool[] available = new bool[gamemodes.Length];
             string[] buttontexts = new string[4];
             string[] descTexts = new string[4];
@@ -181,7 +181,7 @@ namespace Game_Scene
         {
             _instance = this;
             _gameModeController = transform.GetChild(0).GetComponent<GameModeController>();
-            _musicLogic = FindObjectOfType<MusicLogic>();
+            _musicLogic = FindAnyObjectByType<MusicLogic>();
             _allCubesRb = allCubes.GetComponent<Rigidbody2D>();
             _allCubesRb.simulated = false;
             _playerCameraComponent = playerCamera.GetComponent<Camera>();
@@ -253,7 +253,7 @@ namespace Game_Scene
             {
                 GetReward();
             }
-                if (_changeCubeCoroutine == null)
+            if (_changeCubeCoroutine == null)
                 _changeCubeCoroutine = StartCoroutine(CheckingAvailablePos());
             if (!_isLose)
             {
@@ -302,7 +302,6 @@ namespace Game_Scene
         {
             if (_instance._exitGame)
             {
-                Debug.Log("Application Closed");
                 Application.Quit();
             }
         }
@@ -373,7 +372,8 @@ namespace Game_Scene
             if (explodeCubes.collided || Mathf.Abs(tmpRg.velocity.magnitude) > 2f ||
                 Mathf.Abs(tmpRg.angularVelocity) > 0.5f / score)
             {
-                UpdateAchievementsLeaders();
+                if (GooglePlayUtils.Instance.IsConnected())
+                    UpdateAchievementsLeaders();
                 _isLose = true;
                 StopCoroutine(_changeCubeCoroutine);
                 Destroy(placingCube.gameObject);
@@ -410,15 +410,20 @@ namespace Game_Scene
 
         private void CalculatePosCamera()
         {
-            float lastPosition = playerCamera.position.y;
+            Vector3 lastPosition = playerCamera.position;
             float lastSize = _playerCameraComponent.orthographicSize;
             float newSize = 2f * Mathf.Max(Mathf.Abs(_minX), Mathf.Abs(_maxX)) + 5f;
             if (!_isLose)
                 playerCamera.position =
-                    new Vector3(0, lastPosition + (_nowCube.Y - lastPosition) * Time.fixedDeltaTime, -10);
+                    new Vector3(0, lastPosition.y + (_nowCube.Y - lastPosition.y) * Time.fixedDeltaTime, -10);
             else
             {
-                playerCamera.position = new Vector3(0, lastPosition + (0f - lastPosition) * Time.fixedDeltaTime, -10);
+                Vector3 centerPos;
+                if (_allCubesRb != null)
+                    centerPos = _allCubesRb.worldCenterOfMass;
+                else
+                    centerPos = new Vector2(0f, 2f);
+                playerCamera.position = new Vector3(lastPosition.x + (centerPos.x - lastPosition.x) * Time.fixedDeltaTime, lastPosition.y + (centerPos.y - lastPosition.y) * Time.fixedDeltaTime, -10);
             }
 
             _playerCameraComponent.orthographicSize = lastSize + (newSize - lastSize) * Time.fixedDeltaTime;
@@ -520,7 +525,8 @@ namespace Game_Scene
 
         public void GameOver()
         {
-            UpdateAchievementsLeaders();
+            if (GooglePlayUtils.Instance.IsConnected())
+                UpdateAchievementsLeaders();
             addScoreAdButton.SetActive(AdMobManager.Instance.rewardedAd.IsLoaded());
             _isLose = true;
             StopCoroutine(_changeCubeCoroutine);
@@ -610,7 +616,8 @@ namespace Game_Scene
                                        "\n<color=#ff5555>" + LocaleManager.GetLocalizedText("Game.UI.score") +
                                        "</color>: " +
                                        score;
-            UpdateAchievementsLeaders();
+            if (GooglePlayUtils.Instance.IsConnected())
+                UpdateAchievementsLeaders();
         }
     }
 

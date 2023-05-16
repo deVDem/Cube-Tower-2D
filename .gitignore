@@ -23,6 +23,8 @@ ehthumbs.db
 *.user
 *.unityproj
 *.booproj
+*.utmp
+*.vs
 
 # Unity generated
 # ===============
@@ -31,5 +33,8 @@ ehthumbs.db
 [Ll]ibrary/
 sysinfo.txt
 *.stackdump
+[Tt]emp/
 
 Media/
+[Bb]uilds/
+

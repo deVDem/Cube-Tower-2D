@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class LocaleManager : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class LocaleManager : MonoBehaviour
     }
     void Awake()
     {
-        Application.targetFrameRate = Screen.currentResolution.refreshRate;
+        Application.targetFrameRate = Convert.ToInt32(Screen.currentResolution.refreshRateRatio.value);
         QualitySettings.vSyncCount = 1;
        _instance = this;
         _languagesJson = Resources.Load("Languages") as TextAsset;
